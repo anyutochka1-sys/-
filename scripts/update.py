@@ -62,7 +62,7 @@ def extract(book):
                     columns[i] = int(match.group(1))
                     if "2)" in label and any("Предварительные данные" in str(v) for other in rows for v in other):
                         provisional.add(int(match.group(1)))
-            if not columns:
+            if len(columns) < 2 or region(row[0]):
                 continue
             for values in rows[header_index + 1:]:
                 label = next((region(v) for v in values[:4] if region(v)), None)
