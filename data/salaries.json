@@ -5,493 +5,575 @@
         "salary": 65822.1,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Брянская область": {
         "salary": 58486.6,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Владимирская область": {
         "salary": 64720.9,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Воронежская область": {
         "salary": 63352.6,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Ивановская область": {
         "salary": 49722.5,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Калужская область": {
         "salary": 74196.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Костромская область": {
         "salary": 56897.5,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Курская область": {
         "salary": 65127.2,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Липецкая область": {
         "salary": 67750.1,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Московская область": {
         "salary": 99204.9,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Орловская область": {
         "salary": 56133.5,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Рязанская область": {
         "salary": 64454.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Смоленская область": {
         "salary": 60415.1,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Тамбовская область": {
-        "salary": 55168.0,
+        "salary": 55168,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Тверская область": {
         "salary": 64705.9,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Тульская область": {
-        "salary": 73868.0,
+        "salary": 73868,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Ярославская область": {
         "salary": 66006.2,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "г. Москва": {
         "salary": 162571.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Карелия": {
         "salary": 74209.5,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Коми": {
         "salary": 88854.2,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Архангельская область": {
         "salary": 86404.1,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Вологодская область": {
         "salary": 71493.1,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Калининградская область": {
         "salary": 66607.5,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Ленинградская область": {
         "salary": 82025.8,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Мурманская область": {
         "salary": 114277.1,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Новгородская область": {
         "salary": 62974.8,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Псковская область": {
         "salary": 54985.6,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Адыгея": {
         "salary": 56300.8,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Калмыкия": {
         "salary": 49161.5,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Крым": {
         "salary": 55309.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Краснодарский край": {
         "salary": 70410.4,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Астраханская область": {
-        "salary": 62551.0,
+        "salary": 62551,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Волгоградская область": {
         "salary": 61254.2,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Ростовская область": {
         "salary": 62481.6,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "г. Севастополь": {
         "salary": 56941.6,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Дагестан": {
         "salary": 44639.2,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Ингушетия": {
         "salary": 40587.6,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Кабардино-Балкарская Республика": {
         "salary": 46507.3,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Карачаево-Черкесская Республика": {
         "salary": 48488.5,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Северная Осетия - Алания": {
         "salary": 48163.3,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Чеченская Республика": {
         "salary": 41839.5,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Ставропольский край": {
         "salary": 57182.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Башкортостан": {
         "salary": 67578.6,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Марий Эл": {
         "salary": 60998.4,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Мордовия": {
         "salary": 57133.1,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Татарстан": {
-        "salary": 75764.0,
+        "salary": 75764,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Удмуртская Республика": {
         "salary": 67561.1,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Чувашская Республика": {
         "salary": 60843.9,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Пермский край": {
         "salary": 74844.8,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Кировская область": {
         "salary": 58254.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Нижегородская область": {
         "salary": 69546.2,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Оренбургская область": {
         "salary": 64058.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Пензенская область": {
         "salary": 57467.6,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Самарская область": {
         "salary": 70392.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Саратовская область": {
         "salary": 58626.4,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Ульяновская область": {
         "salary": 59743.2,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Курганская область": {
         "salary": 63208.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Свердловская область": {
         "salary": 79078.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Тюменская область": {
         "salary": 121906.6,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Ямало-Ненецкий авт.округ": {
         "salary": 163878.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Челябинская область": {
         "salary": 70946.2,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Алтай": {
         "salary": 63529.3,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Тыва": {
         "salary": 67541.2,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Хакасия": {
         "salary": 71616.2,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Алтайский край": {
         "salary": 55280.5,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Красноярский край": {
         "salary": 95026.1,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Иркутская область": {
         "salary": 87154.3,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Кемеровская область": {
-        "salary": 78202.0,
+        "salary": 78202,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Новосибирская область": {
         "salary": 76770.3,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Омская область": {
-        "salary": 65404.0,
+        "salary": 65404,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Томская область": {
         "salary": 78524.3,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Бурятия": {
         "salary": 72925.8,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Республика Саха (Якутия)": {
         "salary": 126867.9,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Забайкальский край": {
         "salary": 85189.8,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Камчатский край": {
         "salary": 132709.9,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Приморский край": {
         "salary": 88919.9,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Хабаровский край": {
         "salary": 90296.2,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Амурская область": {
         "salary": 87039.5,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Магаданская область": {
         "salary": 156880.6,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Сахалинская область": {
-        "salary": 130360.0,
+        "salary": 130360,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Еврейская авт.область": {
         "salary": 78794.7,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       },
       "Чукотский авт.округ": {
         "salary": 188560.8,
         "effective_from": "2026-03-01",
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
-        "checked_at": "2026-09-29"
+        "checked_at": "2026-09-29",
+        "valid_until": "2026-05-31"
       }
     }
   }
