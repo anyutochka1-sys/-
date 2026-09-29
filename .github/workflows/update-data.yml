@@ -19,11 +19,13 @@ jobs:
           python-version: '3.12'
       - run: pip install openpyxl==3.1.5
       - run: python scripts/update.py
-      - name: Commit changed values
+      - name: Commit changed values and check status
+        if: always()
         run: |
-          if git diff --quiet -- data/salaries.json; then exit 0; fi
+          if git diff --quiet -- data/salaries.json && [ ! -f data/import-status.json ]; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/salaries.json
-          git commit -m "Update verified Rosstat wages"
+          git add data/salaries.json data/import-status.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Check Rosstat wage data"
           git push
