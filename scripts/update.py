@@ -95,11 +95,13 @@ def main():
                 temp.write(pem)
                 temp.flush()
                 certificate = ssl._ssl._test_decode_cert(temp.name)
+                details = subprocess.run(["openssl", "x509", "-in", temp.name, "-noout", "-text"], capture_output=True, text=True)
+                issuer_links = re.findall(r"CA Issuers - URI:([^\s]+)", details.stdout)
                 with tempfile.NamedTemporaryFile(mode="wb", suffix=".pem") as ca:
                     ca.write(sub_ca)
                     ca.flush()
                     checked = subprocess.run(["openssl", "verify", "-partial_chain", "-CAfile", ca.name, temp.name], capture_output=True, text=True)
-            destination = f"issuer={certificate.get('issuer')}; chain={checked.stdout.strip()} {checked.stderr.strip()}"
+            destination = f"issuer={certificate.get('issuer')}; issuer_links={issuer_links}; chain={checked.stderr.splitlines()[-2:]}"
         except Exception as probe:
             destination = f"certificate probe: {probe}"
         raise RuntimeError(f"Rosstat workbook download ({destination}): {exc}") from exc
