@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-29T06:16:26.464195+00:00",
-  "status": "failed",
-  "reason": "Only 39 regions found for 2026; source layout needs review"
+  "checked_at": "2026-09-29T06:17:01.419908+00:00",
+  "status": "ok",
+  "note": "Preliminary annual years are withheld until final publication"
 }
