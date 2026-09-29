@@ -1,6 +1,7 @@
 """Import Rosstat's final annual regional wage table; fail closed on layout changes."""
 import datetime as dt
 import io
+import hashlib
 import json
 import re
 import ssl
@@ -12,6 +13,7 @@ import certifi
 
 SOURCE = "https://rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx"
 ROOT_CA = "https://gu-st.ru/content/Other/doc/russiantrustedca.pem"
+ROOT_FINGERPRINT = "d26d2d0231b7c39f92cc738512ba54103519e4405d68b5bd703e9788ca8ecf31"
 DATA = Path("data/salaries.json")
 STATUS = Path("data/import-status.json")
 EFFECTIVE = {2024: "2026-03-01", 2025: "2026-06-01"}
@@ -58,11 +60,14 @@ def extract(book):
 
 
 def main():
-    base_context = ssl.create_default_context(cafile=certifi.where())
-    with urllib.request.urlopen(ROOT_CA, timeout=30, context=base_context) as response:
+    # Bootstrap only this CA download; trust it solely when its DER fingerprint matches.
+    bootstrap = ssl._create_unverified_context()
+    with urllib.request.urlopen(ROOT_CA, timeout=30, context=bootstrap) as response:
         root = response.read()
-    if b"BEGIN CERTIFICATE" not in root:
-        raise ValueError("Official CA download is not a PEM certificate")
+    certificates = re.findall(rb"-----BEGIN CERTIFICATE-----.*?-----END CERTIFICATE-----", root, re.S)
+    if not any(hashlib.sha256(ssl.PEM_cert_to_DER_cert(pem.decode("ascii"))).hexdigest() == ROOT_FINGERPRINT for pem in certificates):
+        raise ValueError("Official root certificate fingerprint mismatch")
+    base_context = ssl.create_default_context(cafile=certifi.where())
     base_context.load_verify_locations(cadata=root.decode("ascii"))
     req = urllib.request.Request(SOURCE, headers={"User-Agent": "Mozilla/5.0 (regional-wage-reference)"})
     with urllib.request.urlopen(req, timeout=60, context=base_context) as response:
