@@ -42,7 +42,7 @@ def region(value):
     if not isinstance(value, str):
         return None
     name = re.sub(r"\s+", " ", value).strip().replace("Ё", "Е")
-    if (REGION_START.search(name) or name.endswith((" область", " край", " Республика", " автономный округ", " авт.округ", " авт.область"))) and not any(
+    if (REGION_START.search(name) or name.endswith((" область", " край", " Республика", " автономный округ", " авт.округ", " авт.область")) or any(token in name for token in ("Санкт-Петербург", "Ненецкий", "Ханты-Мансийский"))) and not any(
         marker in name.lower() for marker in ("российская федерация", "федеральный округ", "в том числе", "районы крайнего")
     ):
         return name
