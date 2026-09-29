@@ -98,6 +98,7 @@ def main():
     base_context.verify_flags |= ssl.VERIFY_X509_PARTIAL_CHAIN
     found = {}
     sources = {}
+    preliminary_years = set()
     for file_year in range(max(2025, dt.date.today().year - 1), 2024, -1):
         source = SOURCE_PATTERN.format(file_year)
         req = urllib.request.Request(source, headers={"User-Agent": "Mozilla/5.0 (regional-wage-reference)"})
@@ -112,22 +113,21 @@ def main():
             raise ValueError(f"Rosstat response is not an XLSX file: {source}")
         years, provisional = extract(load_workbook(io.BytesIO(raw), read_only=True, data_only=True))
         for year, regions in years.items():
-            if year in provisional or year in found:
+            if year in found:
                 continue
             if len(regions) < 80:
                 raise ValueError(f"Only {len(regions)} regions found for {year}; source layout needs review")
-            expected = {2024: 57133.1, 2025: 66836.8}.get(year)
-            if expected is not None and abs(regions.get("Республика Мордовия", 0) - expected) > 1:
-                if year == 2025:
-                    continue  # An older revision is not the final figure already used by SFR.
-                raise ValueError(f"Year {year}: Mordovia cross-check failed")
+            if year == 2024 and abs(regions.get("Республика Мордовия", 0) - 57133.1) > 1:
+                raise ValueError("Year 2024: Mordovia cross-check failed")
             found[year] = regions
             sources[year] = source
+            if year in provisional or (year == 2025 and abs(regions.get("Республика Мордовия", 0) - 66836.8) > 1):
+                preliminary_years.add(year)
     existing = json.loads(DATA.read_text(encoding="utf-8"))
     checked = dt.datetime.now(dt.timezone.utc).date().isoformat()
     for year, regions in found.items():
         existing["years"][str(year)] = {
-            name: {"salary": salary, "effective_from": EFFECTIVE.get(year), "valid_until": VALID_UNTIL.get(year), "source": sources[year], "checked_at": checked}
+            name: {"salary": salary, "effective_from": EFFECTIVE.get(year), "valid_until": VALID_UNTIL.get(year), "preliminary": year in preliminary_years, "source": sources[year], "checked_at": checked}
             for name, salary in regions.items()
         }
     if not any(str(y) in existing["years"] for y in EFFECTIVE):
@@ -135,14 +135,14 @@ def main():
     DATA.write_text(json.dumps(existing, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     required_year = dt.date.today().year - 1
     current = existing["years"].get(str(required_year), {})
-    return bool(current and next(iter(current.values())).get("effective_from"))
+    return bool(current and next(iter(current.values())).get("effective_from")), bool(current and next(iter(current.values())).get("preliminary"))
 
 
 if __name__ == "__main__":
     try:
-        current_available = main()
+        current_available, current_preliminary = main()
     except Exception as exc:
         STATUS.write_text(json.dumps({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(), "status": "failed", "reason": str(exc)}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         raise
     else:
-        STATUS.write_text(json.dumps({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(), "status": "ok" if current_available else "partial", "note": "Latest required annual year remains unverified" if not current_available else "Verified annual data imported"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        STATUS.write_text(json.dumps({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(), "status": "ok" if current_available and not current_preliminary else "partial", "note": "Latest year uses preliminary Rosstat figures; amounts may differ from SFR" if current_preliminary else "Latest required annual year remains unavailable" if not current_available else "Final annual data imported"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
