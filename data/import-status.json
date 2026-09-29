@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-29T05:56:17.344596+00:00",
+  "checked_at": "2026-09-29T05:56:48.586772+00:00",
   "status": "failed",
-  "reason": "Rosstat workbook download (https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx): <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+  "reason": "Rosstat workbook download (issuer=((('countryName', 'RU'),), (('organizationName', 'The Ministry of Digital Development and Communications'),), (('commonName', 'Russian Trusted Sub CA'),)), subject=((('commonName', '*.rosstat.gov.ru'),), (('organizationName', 'Федеральная служба государственной статистики'),), (('countryName', 'RU'),), (('stateOrProvinceName', '77 г.Москва'),), (('localityName', 'г. Москва'),), (('streetAddress', 'ул. Мясницкая 39, строение 1'),), (('1.2.643.100.4', '7708234640'),), (('OGRN', '1047708023483'),))): <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
 }
