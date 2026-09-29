@@ -148,6 +148,13 @@
         "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
         "checked_at": "2026-09-29"
       },
+      "Ненецкий авт.округ": {
+        "salary": 135205.6,
+        "effective_from": "2026-03-01",
+        "valid_until": "2026-05-31",
+        "source": "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx",
+        "checked_at": "2026-09-29"
+      },
       "Вологодская область": {
         "salary": 71493.1,
         "effective_from": "2026-03-01",
