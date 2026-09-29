@@ -19,6 +19,8 @@ SOURCE = "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx"
 ROOT_CA = "https://gu-st.ru/content/Other/doc/russiantrustedca.pem"
 ROOT_FINGERPRINT = "d26d2d0231b7c39f92cc738512ba54103519e4405d68b5bd703e9788ca8ecf31"
 SUB_FINGERPRINT = "bbbde2103e790b999ec62bd03cf625a5a2e7c316e10afe6a490eedead8b3fd9b"
+CURRENT_SUB = "http://nuc-cdp.digital.gov.ru/cdp/subca_ssl_rsa2024.crt"
+CURRENT_SUB_FINGERPRINT = "2155785036c900dbb5f1bb2a1569c80c55595bd6bf94867a29bbddbc7d88a3f2"
 DATA = Path("data/salaries.json")
 STATUS = Path("data/import-status.json")
 EFFECTIVE = {2024: "2026-03-01", 2025: "2026-06-01"}
@@ -76,7 +78,10 @@ def main():
     fingerprints = {hashlib.sha256(ssl.PEM_cert_to_DER_cert(pem.decode("ascii"))).hexdigest() for pem in certificates}
     if not {ROOT_FINGERPRINT, SUB_FINGERPRINT} <= fingerprints:
         raise ValueError("Official certificate chain fingerprints mismatch")
-    sub_ca = next(pem for pem in certificates if hashlib.sha256(ssl.PEM_cert_to_DER_cert(pem.decode("ascii"))).hexdigest() == SUB_FINGERPRINT)
+    with urllib.request.urlopen(CURRENT_SUB, timeout=30) as response:
+        sub_ca = response.read()
+    if hashlib.sha256(ssl.PEM_cert_to_DER_cert(sub_ca.decode("ascii"))).hexdigest() != CURRENT_SUB_FINGERPRINT:
+        raise ValueError("Current official intermediate CA fingerprint mismatch")
     base_context = ssl.create_default_context(cafile=certifi.where())
     base_context.load_verify_locations(cadata=sub_ca.decode("ascii"))
     # The Rosstat server omits its intermediate CA; trust the individually pinned sub CA.
