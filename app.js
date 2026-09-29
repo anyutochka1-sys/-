@@ -8,7 +8,7 @@ function render(){
   const region=regionEl.value,years=Object.keys(db.years).map(Number).sort((a,b)=>b-a),requested=new Date(`${dateEl.value}T12:00:00`).getFullYear()-1;
   if(!region||!dateEl.value){resultEl.textContent='Выберите регион и дату.';archiveEl.textContent='';return}
   if(dateEl.value<'2026-03-01'){resultEl.textContent='Это правило применяется с 1 марта 2026 года. Для более ранней даты расчёт здесь не показывается.';return}
-  const active=years.find(y=>y<=requested&&db.years[y][region]?.effective_from&&db.years[y][region].effective_from<=dateEl.value);
+  const active=years.find(y=>y<=requested&&db.years[y][region]?.effective_from&&db.years[y][region].effective_from<=dateEl.value&&(!db.years[y][region].valid_until||db.years[y][region].valid_until>=dateEl.value));
   const entry=active?db.years[active][region]:null;
   if(entry){const value=Math.round(entry.salary*share(+childrenEl.value)*100)/100;resultEl.innerHTML=`<div>Ориентир в месяц</div><div class="amount">${rub(value)}</div><div class="meta">Средняя зарплата за ${active} год: ${rub(entry.salary)}. Применяется с ${new Date(entry.effective_from+'T12:00:00').toLocaleDateString('ru-RU')}. <a href="${entry.source}" target="_blank" rel="noopener">Источник</a>.</div>`}
   else resultEl.textContent='Нет проверенных данных о показателе, применимом на эту дату. Сумму пока не показываем.';
