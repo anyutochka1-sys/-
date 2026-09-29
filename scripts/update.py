@@ -11,7 +11,7 @@ from pathlib import Path
 from openpyxl import load_workbook
 import certifi
 
-SOURCE = "https://rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx"
+SOURCE = "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx"
 ROOT_CA = "https://gu-st.ru/content/Other/doc/russiantrustedca.pem"
 ROOT_FINGERPRINT = "d26d2d0231b7c39f92cc738512ba54103519e4405d68b5bd703e9788ca8ecf31"
 DATA = Path("data/salaries.json")
