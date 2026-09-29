@@ -10,7 +10,7 @@ from pathlib import Path
 from openpyxl import load_workbook
 import certifi
 
-SOURCE = "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx"
+SOURCE = "https://rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx"
 DATA = Path("data/salaries.json")
 STATUS = Path("data/import-status.json")
 EFFECTIVE = {2024: "2026-03-01", 2025: "2026-06-01"}
