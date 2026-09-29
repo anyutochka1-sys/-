@@ -10,6 +10,7 @@ from openpyxl import load_workbook
 
 SOURCE = "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx"
 DATA = Path("data/salaries.json")
+STATUS = Path("data/import-status.json")
 EFFECTIVE = {2024: "2026-03-01", 2025: "2026-06-01"}
 REGION_START = re.compile(r"^(?:Республика |Край |Область |Автономн|г\. |Город |Москва$|Санкт-Петербург$|Севастополь$)", re.I)
 
@@ -79,4 +80,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as exc:
+        STATUS.write_text(json.dumps({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(), "status": "failed", "reason": str(exc)}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        raise
+    else:
+        STATUS.write_text(json.dumps({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(), "status": "ok"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
