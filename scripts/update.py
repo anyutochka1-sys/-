@@ -75,8 +75,9 @@ def main():
     fingerprints = {hashlib.sha256(ssl.PEM_cert_to_DER_cert(pem.decode("ascii"))).hexdigest() for pem in certificates}
     if not {ROOT_FINGERPRINT, SUB_FINGERPRINT} <= fingerprints:
         raise ValueError("Official certificate chain fingerprints mismatch")
+    sub_ca = next(pem for pem in certificates if hashlib.sha256(ssl.PEM_cert_to_DER_cert(pem.decode("ascii"))).hexdigest() == SUB_FINGERPRINT)
     base_context = ssl.create_default_context(cafile=certifi.where())
-    base_context.load_verify_locations(cadata=root.decode("ascii"))
+    base_context.load_verify_locations(cadata=sub_ca.decode("ascii"))
     # The Rosstat server omits its intermediate CA; trust the individually pinned sub CA.
     base_context.verify_flags |= ssl.VERIFY_X509_PARTIAL_CHAIN
     req = urllib.request.Request(SOURCE, headers={"User-Agent": "Mozilla/5.0 (regional-wage-reference)"})
