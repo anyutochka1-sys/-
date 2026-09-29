@@ -119,10 +119,12 @@ def main():
         if actual is None or abs(actual - expected) > 1:
             samples = []
             for sheet in book.worksheets:
+                for row in list(sheet.iter_rows(values_only=True))[:8]:
+                    samples.append([sheet.title, *[str(v)[:70] for v in row[:12]]])
                 for row in sheet.iter_rows(values_only=True):
                     if any("Мордов" in str(v) or str(v).strip() in ("2024", "2025") for v in row):
                         samples.append([sheet.title, *[str(v)[:80] for v in row[:12]]])
-                        if len(samples) >= 8:
+                        if len(samples) >= 24:
                             break
             raise ValueError(f"Year {year}: Mordovia cross-check failed ({actual}); samples={samples}")
     existing = json.loads(DATA.read_text(encoding="utf-8"))
