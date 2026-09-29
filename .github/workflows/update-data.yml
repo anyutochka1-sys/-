@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install openpyxl==3.1.5
+      - run: pip install openpyxl==3.1.5 certifi==2025.8.3
       - run: python scripts/update.py
       - name: Commit changed values and check status
         if: always()
