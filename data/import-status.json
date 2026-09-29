@@ -1,0 +1,5 @@
+{
+  "checked_at": "2026-09-29T05:44:35.270477+00:00",
+  "status": "failed",
+  "reason": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+}
