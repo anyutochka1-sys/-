@@ -1,4 +1,4 @@
-"""Import Rosstat's final annual regional wage table; fail closed on layout changes."""
+"""Check Rosstat's annual regional wage table and label preliminary estimates."""
 import datetime as dt
 import io
 import hashlib
