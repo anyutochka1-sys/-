@@ -50,10 +50,18 @@ def region(value):
 
 def extract(book):
     years = {}
+    provisional = set()
     for sheet in book.worksheets:
         rows = list(sheet.iter_rows(values_only=True))
         for header_index, row in enumerate(rows):
-            columns = {i: int(v) for i, v in enumerate(row) if str(v).strip() in ("2024", "2025", "2026")}
+            columns = {}
+            for i, value in enumerate(row):
+                label = str(value).strip()
+                match = re.fullmatch(r"(202[4-9])(?:\D.*)?", label)
+                if match:
+                    columns[i] = int(match.group(1))
+                    if "2)" in label and any("Предварительные данные" in str(v) for other in rows for v in other):
+                        provisional.add(int(match.group(1)))
             if not columns:
                 continue
             for values in rows[header_index + 1:]:
@@ -63,7 +71,7 @@ def extract(book):
                 for col, year in columns.items():
                     if col < len(values) and (salary := number(values[col])):
                         years.setdefault(year, {})[label] = salary
-    return years
+    return years, provisional
 
 
 def main():
@@ -113,8 +121,8 @@ def main():
     if not raw.startswith(b"PK"):
         raise ValueError("Rosstat response is not an XLSX file")
     book = load_workbook(io.BytesIO(raw), read_only=True, data_only=True)
-    found = extract(book)
-    for year, expected in ((2024, 57133.1), (2025, 66836.8)):
+    found, provisional = extract(book)
+    for year, expected in ((2024, 57133.1),):
         actual = found.get(year, {}).get("Республика Мордовия")
         if actual is None or abs(actual - expected) > 1:
             samples = []
@@ -132,6 +140,10 @@ def main():
     existing = json.loads(DATA.read_text(encoding="utf-8"))
     checked = dt.datetime.now(dt.timezone.utc).date().isoformat()
     for year, regions in found.items():
+        if year in provisional:
+            continue
+        if year == 2025 and abs(regions.get("Республика Мордовия", 0) - 66836.8) > 1:
+            raise ValueError("2025 annual value disagrees with SFR's confirmed Mordovia value")
         if len(regions) < 80:
             raise ValueError(f"Only {len(regions)} regions found for {year}; source layout needs review")
         existing["years"][str(year)] = {
@@ -150,4 +162,4 @@ if __name__ == "__main__":
         STATUS.write_text(json.dumps({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(), "status": "failed", "reason": str(exc)}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         raise
     else:
-        STATUS.write_text(json.dumps({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(), "status": "ok"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        STATUS.write_text(json.dumps({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(), "status": "ok", "note": "Preliminary annual years are withheld until final publication"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
