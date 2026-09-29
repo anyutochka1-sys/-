@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f8f4ee">
+  <title>Учётные алименты — расчёт по регионам</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header><span class="eyebrow">Учётные алименты · единое пособие</span><h1>Какие алименты учтут в доход?</h1><p>Выберите регион и дату обращения. Покажем расчёт по опубликованной средней зарплате Росстата.</p></header>
+    <section class="card" aria-label="Расчёт">
+      <div class="fields"><label>Регион проживания<select id="region"><option value="">Загрузка данных…</option></select></label><label>Дата подачи заявления<input id="date" type="date" min="2026-03-01"></label><label>Количество детей<select id="children"><option value="1">Один ребёнок</option><option value="2">Двое детей</option><option value="3">Трое и более</option></select></label></div>
+      <div id="result" class="result" role="status" aria-live="polite"></div>
+    </section>
+    <section class="card"><h2>Данные по годам</h2><p>Здесь можно сравнить опубликованные годовые показатели. Год данных может отличаться от года подачи заявления.</p><label>Год данных<select id="year"></select></label><div id="archive" class="archive"></div></section>
+    <section class="note"><h2>Как считается</h2><p>В случаях, к которым применяется правило условных алиментов при назначении единого пособия, учитывают ¼ средней зарплаты на одного ребёнка, ⅓ на двоих, ½ на троих и более. Если итоговые сведения за предыдущий год ещё не опубликованы, используется последний опубликованный год.</p><p>Это справочный расчёт, а не определение суммы, которую обязан платить второй родитель. При судебном решении действуют другие правила учёта.</p><p><a href="https://sfr.gov.ru/branches/murmansk/news~2026/02/24/279074" target="_blank" rel="noopener">Разъяснение СФР</a> · <a href="https://rosstat.gov.ru/labor_market_employment_salaries" target="_blank" rel="noopener">Данные Росстата</a></p></section>
+  </main><script src="app.js"></script>
+</body>
+</html>
