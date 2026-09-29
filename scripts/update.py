@@ -6,6 +6,7 @@ import json
 import re
 import ssl
 import socket
+import subprocess
 import tempfile
 from urllib.parse import urlparse
 import urllib.request
@@ -94,7 +95,11 @@ def main():
                 temp.write(pem)
                 temp.flush()
                 certificate = ssl._ssl._test_decode_cert(temp.name)
-            destination = f"issuer={certificate.get('issuer')}, subject={certificate.get('subject')}"
+                with tempfile.NamedTemporaryFile(mode="wb", suffix=".pem") as ca:
+                    ca.write(sub_ca)
+                    ca.flush()
+                    checked = subprocess.run(["openssl", "verify", "-partial_chain", "-CAfile", ca.name, temp.name], capture_output=True, text=True)
+            destination = f"issuer={certificate.get('issuer')}; chain={checked.stdout.strip()} {checked.stderr.strip()}"
         except Exception as probe:
             destination = f"certificate probe: {probe}"
         raise RuntimeError(f"Rosstat workbook download ({destination}): {exc}") from exc
