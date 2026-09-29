@@ -60,6 +60,10 @@ def main():
     if not raw.startswith(b"PK"):
         raise ValueError("Rosstat response is not an XLSX file")
     found = extract(load_workbook(io.BytesIO(raw), read_only=True, data_only=True))
+    for year, expected in ((2024, 57133.1), (2025, 66836.8)):
+        actual = found.get(year, {}).get("Республика Мордовия")
+        if actual is None or abs(actual - expected) > 1:
+            raise ValueError(f"Year {year}: Mordovia cross-check failed ({actual})")
     existing = json.loads(DATA.read_text(encoding="utf-8"))
     checked = dt.datetime.now(dt.timezone.utc).date().isoformat()
     for year, regions in found.items():
