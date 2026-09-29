@@ -133,13 +133,16 @@ def main():
     if not any(str(y) in existing["years"] for y in EFFECTIVE):
         raise ValueError("No confirmed annual data extracted")
     DATA.write_text(json.dumps(existing, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    required_year = dt.date.today().year - 1
+    current = existing["years"].get(str(required_year), {})
+    return bool(current and next(iter(current.values())).get("effective_from"))
 
 
 if __name__ == "__main__":
     try:
-        main()
+        current_available = main()
     except Exception as exc:
         STATUS.write_text(json.dumps({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(), "status": "failed", "reason": str(exc)}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         raise
     else:
-        STATUS.write_text(json.dumps({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(), "status": "ok", "note": "Preliminary annual years are withheld until final publication"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        STATUS.write_text(json.dumps({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(), "status": "ok" if current_available else "partial", "note": "Latest required annual year remains unverified" if not current_available else "Verified annual data imported"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
