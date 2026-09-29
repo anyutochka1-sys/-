@@ -3,10 +3,12 @@ import datetime as dt
 import io
 import json
 import re
+import ssl
 import urllib.request
 from pathlib import Path
 
 from openpyxl import load_workbook
+import certifi
 
 SOURCE = "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx"
 DATA = Path("data/salaries.json")
@@ -56,7 +58,7 @@ def extract(book):
 
 def main():
     req = urllib.request.Request(SOURCE, headers={"User-Agent": "Mozilla/5.0 (regional-wage-reference)"})
-    with urllib.request.urlopen(req, timeout=60) as response:
+    with urllib.request.urlopen(req, timeout=60, context=ssl.create_default_context(cafile=certifi.where())) as response:
         raw = response.read()
     if not raw.startswith(b"PK"):
         raise ValueError("Rosstat response is not an XLSX file")
