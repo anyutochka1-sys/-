@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-29T06:01:29.695343+00:00",
+  "checked_at": "2026-09-29T06:03:05.045522+00:00",
   "status": "failed",
-  "reason": "Rosstat workbook download (issuer=((('countryName', 'RU'),), (('organizationName', 'The Ministry of Digital Development and Communications'),), (('commonName', 'Russian Trusted Sub CA'),)); issuer_links=['http://nuc-cdp.voskhod.ru/cdp/subca_ssl_rsa2024.crt', 'http://nuc-cdp.digital.gov.ru/cdp/subca_ssl_rsa2024.crt']; chain=['error 20 at 0 depth lookup: unable to get local issuer certificate', 'error /tmp/tmpzpvlmjrs.pem: verification failed']): <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+  "reason": "Year 2024: Mordovia cross-check failed (None)"
 }
