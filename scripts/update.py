@@ -5,6 +5,9 @@ import hashlib
 import json
 import re
 import ssl
+import socket
+import tempfile
+from urllib.parse import urlparse
 import urllib.request
 from pathlib import Path
 
@@ -78,10 +81,17 @@ def main():
             raw = response.read()
     except Exception as exc:
         try:
-            with urllib.request.urlopen(urllib.request.Request(SOURCE, method="HEAD"), timeout=20, context=bootstrap) as response:
-                destination = response.url
+            host = urlparse(SOURCE).hostname
+            with socket.create_connection((host, 443), timeout=15) as sock:
+                with bootstrap.wrap_socket(sock, server_hostname=host) as tls:
+                    pem = ssl.DER_cert_to_PEM_cert(tls.getpeercert(binary_form=True))
+            with tempfile.NamedTemporaryFile(mode="w", suffix=".pem") as temp:
+                temp.write(pem)
+                temp.flush()
+                certificate = ssl._ssl._test_decode_cert(temp.name)
+            destination = f"issuer={certificate.get('issuer')}, subject={certificate.get('subject')}"
         except Exception as probe:
-            destination = f"HEAD probe: {probe}"
+            destination = f"certificate probe: {probe}"
         raise RuntimeError(f"Rosstat workbook download ({destination}): {exc}") from exc
     if not raw.startswith(b"PK"):
         raise ValueError("Rosstat response is not an XLSX file")
