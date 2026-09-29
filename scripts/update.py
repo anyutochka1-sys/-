@@ -11,6 +11,7 @@ from openpyxl import load_workbook
 import certifi
 
 SOURCE = "https://rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx"
+ROOT_CA = "https://gu-st.ru/content/Other/doc/russiantrustedca.pem"
 DATA = Path("data/salaries.json")
 STATUS = Path("data/import-status.json")
 EFFECTIVE = {2024: "2026-03-01", 2025: "2026-06-01"}
@@ -57,8 +58,14 @@ def extract(book):
 
 
 def main():
+    base_context = ssl.create_default_context(cafile=certifi.where())
+    with urllib.request.urlopen(ROOT_CA, timeout=30, context=base_context) as response:
+        root = response.read()
+    if b"BEGIN CERTIFICATE" not in root:
+        raise ValueError("Official CA download is not a PEM certificate")
+    base_context.load_verify_locations(cadata=root.decode("ascii"))
     req = urllib.request.Request(SOURCE, headers={"User-Agent": "Mozilla/5.0 (regional-wage-reference)"})
-    with urllib.request.urlopen(req, timeout=60, context=ssl.create_default_context(cafile=certifi.where())) as response:
+    with urllib.request.urlopen(req, timeout=60, context=base_context) as response:
         raw = response.read()
     if not raw.startswith(b"PK"):
         raise ValueError("Rosstat response is not an XLSX file")
