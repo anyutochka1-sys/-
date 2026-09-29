@@ -77,7 +77,12 @@ def main():
         with urllib.request.urlopen(req, timeout=60, context=base_context) as response:
             raw = response.read()
     except Exception as exc:
-        raise RuntimeError(f"Rosstat workbook download: {exc}") from exc
+        try:
+            with urllib.request.urlopen(urllib.request.Request(SOURCE, method="HEAD"), timeout=20, context=bootstrap) as response:
+                destination = response.url
+        except Exception as probe:
+            destination = f"HEAD probe: {probe}"
+        raise RuntimeError(f"Rosstat workbook download ({destination}): {exc}") from exc
     if not raw.startswith(b"PK"):
         raise ValueError("Rosstat response is not an XLSX file")
     found = extract(load_workbook(io.BytesIO(raw), read_only=True, data_only=True))
