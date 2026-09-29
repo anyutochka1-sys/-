@@ -5,17 +5,14 @@ import hashlib
 import json
 import re
 import ssl
-import socket
-import subprocess
-import tempfile
-from urllib.parse import urlparse
 import urllib.request
+from urllib.error import HTTPError
 from pathlib import Path
 
 from openpyxl import load_workbook
 import certifi
 
-SOURCE = "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx"
+SOURCE_PATTERN = "https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_{}.xlsx"
 ROOT_CA = "https://gu-st.ru/content/Other/doc/russiantrustedca.pem"
 ROOT_FINGERPRINT = "d26d2d0231b7c39f92cc738512ba54103519e4405d68b5bd703e9788ca8ecf31"
 SUB_FINGERPRINT = "bbbde2103e790b999ec62bd03cf625a5a2e7c316e10afe6a490eedead8b3fd9b"
@@ -56,6 +53,8 @@ def extract(book):
     provisional = set()
     for sheet in book.worksheets:
         rows = list(sheet.iter_rows(values_only=True))
+        preliminary_notes = {m.group(1) for row in rows for value in row if isinstance(value, str)
+                             if (m := re.search(r"(?:^|\n)\s*(\d+)\)\s*Предварительные данные", value, re.I))}
         for header_index, row in enumerate(rows):
             columns = {}
             for i, value in enumerate(row):
@@ -63,7 +62,7 @@ def extract(book):
                 match = re.match(r"^(202[4-9])", label)
                 if match:
                     columns[i] = int(match.group(1))
-                    if "2)" in label and any("Предварительные данные" in str(v) for other in rows for v in other):
+                    if any(f"{note})" in label for note in preliminary_notes):
                         provisional.add(int(match.group(1)))
             if len(columns) < 2 or region(row[0]):
                 continue
@@ -97,60 +96,38 @@ def main():
     base_context.load_verify_locations(cadata=sub_ca.decode("ascii"))
     # The Rosstat server omits its intermediate CA; trust the individually pinned sub CA.
     base_context.verify_flags |= ssl.VERIFY_X509_PARTIAL_CHAIN
-    req = urllib.request.Request(SOURCE, headers={"User-Agent": "Mozilla/5.0 (regional-wage-reference)"})
-    try:
-        with urllib.request.urlopen(req, timeout=60, context=base_context) as response:
-            raw = response.read()
-    except Exception as exc:
+    found = {}
+    sources = {}
+    for file_year in range(max(2025, dt.date.today().year - 1), 2024, -1):
+        source = SOURCE_PATTERN.format(file_year)
+        req = urllib.request.Request(source, headers={"User-Agent": "Mozilla/5.0 (regional-wage-reference)"})
         try:
-            host = urlparse(SOURCE).hostname
-            with socket.create_connection((host, 443), timeout=15) as sock:
-                with bootstrap.wrap_socket(sock, server_hostname=host) as tls:
-                    pem = ssl.DER_cert_to_PEM_cert(tls.getpeercert(binary_form=True))
-            with tempfile.NamedTemporaryFile(mode="w", suffix=".pem") as temp:
-                temp.write(pem)
-                temp.flush()
-                certificate = ssl._ssl._test_decode_cert(temp.name)
-                details = subprocess.run(["openssl", "x509", "-in", temp.name, "-noout", "-text"], capture_output=True, text=True)
-                issuer_links = re.findall(r"CA Issuers - URI:([^\s]+)", details.stdout)
-                with tempfile.NamedTemporaryFile(mode="wb", suffix=".pem") as ca:
-                    ca.write(sub_ca)
-                    ca.flush()
-                    checked = subprocess.run(["openssl", "verify", "-partial_chain", "-CAfile", ca.name, temp.name], capture_output=True, text=True)
-            destination = f"issuer={certificate.get('issuer')}; issuer_links={issuer_links}; chain={checked.stderr.splitlines()[-2:]}"
-        except Exception as probe:
-            destination = f"certificate probe: {probe}"
-        raise RuntimeError(f"Rosstat workbook download ({destination}): {exc}") from exc
-    if not raw.startswith(b"PK"):
-        raise ValueError("Rosstat response is not an XLSX file")
-    book = load_workbook(io.BytesIO(raw), read_only=True, data_only=True)
-    found, provisional = extract(book)
-    for year, expected in ((2024, 57133.1),):
-        actual = found.get(year, {}).get("Республика Мордовия")
-        if actual is None or abs(actual - expected) > 1:
-            samples = []
-            for sheet in book.worksheets:
-                for row in list(sheet.iter_rows(values_only=True))[:8]:
-                    samples.append([sheet.title, *[str(v)[:70] for v in row[:12]]])
-                for row in list(sheet.iter_rows(values_only=True))[-8:]:
-                    samples.append([sheet.title, *[str(v)[:140] for v in row[:4]]])
-                for row in sheet.iter_rows(values_only=True):
-                    if any("Мордов" in str(v) or str(v).strip() in ("2024", "2025") for v in row):
-                        samples.append([sheet.title, *[str(v)[:80] for v in row[:12]]])
-                        if len(samples) >= 24:
-                            break
-            raise ValueError(f"Year {year}: Mordovia cross-check failed ({actual}); samples={samples}")
+            with urllib.request.urlopen(req, timeout=60, context=base_context) as response:
+                raw = response.read()
+        except HTTPError as exc:
+            if exc.code == 404 and file_year > 2025:
+                continue
+            raise RuntimeError(f"Rosstat workbook download ({source}): {exc}") from exc
+        if not raw.startswith(b"PK"):
+            raise ValueError(f"Rosstat response is not an XLSX file: {source}")
+        years, provisional = extract(load_workbook(io.BytesIO(raw), read_only=True, data_only=True))
+        for year, regions in years.items():
+            if year in provisional or year in found:
+                continue
+            if len(regions) < 80:
+                raise ValueError(f"Only {len(regions)} regions found for {year}; source layout needs review")
+            expected = {2024: 57133.1, 2025: 66836.8}.get(year)
+            if expected is not None and abs(regions.get("Республика Мордовия", 0) - expected) > 1:
+                if year == 2025:
+                    continue  # An older revision is not the final figure already used by SFR.
+                raise ValueError(f"Year {year}: Mordovia cross-check failed")
+            found[year] = regions
+            sources[year] = source
     existing = json.loads(DATA.read_text(encoding="utf-8"))
     checked = dt.datetime.now(dt.timezone.utc).date().isoformat()
     for year, regions in found.items():
-        if year in provisional:
-            continue
-        if year == 2025 and abs(regions.get("Республика Мордовия", 0) - 66836.8) > 1:
-            raise ValueError("2025 annual value disagrees with SFR's confirmed Mordovia value")
-        if len(regions) < 80:
-            raise ValueError(f"Only {len(regions)} regions found for {year}; source layout needs review")
         existing["years"][str(year)] = {
-            name: {"salary": salary, "effective_from": EFFECTIVE.get(year), "valid_until": VALID_UNTIL.get(year), "source": SOURCE, "checked_at": checked}
+            name: {"salary": salary, "effective_from": EFFECTIVE.get(year), "valid_until": VALID_UNTIL.get(year), "source": sources[year], "checked_at": checked}
             for name, salary in regions.items()
         }
     if not any(str(y) in existing["years"] for y in EFFECTIVE):
