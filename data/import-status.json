@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-29T05:55:27.090267+00:00",
+  "checked_at": "2026-09-29T05:56:17.344596+00:00",
   "status": "failed",
-  "reason": "Rosstat workbook download: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+  "reason": "Rosstat workbook download (https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx): <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
 }
