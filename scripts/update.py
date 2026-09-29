@@ -57,7 +57,7 @@ def extract(book):
             columns = {}
             for i, value in enumerate(row):
                 label = str(value).strip()
-                match = re.fullmatch(r"(202[4-9])(?:\D.*)?", label)
+                match = re.match(r"^(202[4-9])", label)
                 if match:
                     columns[i] = int(match.group(1))
                     if "2)" in label and any("Предварительные данные" in str(v) for other in rows for v in other):
