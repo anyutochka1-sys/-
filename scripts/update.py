@@ -62,16 +62,22 @@ def extract(book):
 def main():
     # Bootstrap only this CA download; trust it solely when its DER fingerprint matches.
     bootstrap = ssl._create_unverified_context()
-    with urllib.request.urlopen(ROOT_CA, timeout=30, context=bootstrap) as response:
-        root = response.read()
+    try:
+        with urllib.request.urlopen(ROOT_CA, timeout=30, context=bootstrap) as response:
+            root = response.read()
+    except Exception as exc:
+        raise RuntimeError(f"Root CA download: {exc}") from exc
     certificates = re.findall(rb"-----BEGIN CERTIFICATE-----.*?-----END CERTIFICATE-----", root, re.S)
     if not any(hashlib.sha256(ssl.PEM_cert_to_DER_cert(pem.decode("ascii"))).hexdigest() == ROOT_FINGERPRINT for pem in certificates):
         raise ValueError("Official root certificate fingerprint mismatch")
     base_context = ssl.create_default_context(cafile=certifi.where())
     base_context.load_verify_locations(cadata=root.decode("ascii"))
     req = urllib.request.Request(SOURCE, headers={"User-Agent": "Mozilla/5.0 (regional-wage-reference)"})
-    with urllib.request.urlopen(req, timeout=60, context=base_context) as response:
-        raw = response.read()
+    try:
+        with urllib.request.urlopen(req, timeout=60, context=base_context) as response:
+            raw = response.read()
+    except Exception as exc:
+        raise RuntimeError(f"Rosstat workbook download: {exc}") from exc
     if not raw.startswith(b"PK"):
         raise ValueError("Rosstat response is not an XLSX file")
     found = extract(load_workbook(io.BytesIO(raw), read_only=True, data_only=True))
