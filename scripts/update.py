@@ -24,6 +24,7 @@ CURRENT_SUB_FINGERPRINT = "2155785036c900dbb5f1bb2a1569c80c55595bd6bf94867a29bbd
 DATA = Path("data/salaries.json")
 STATUS = Path("data/import-status.json")
 EFFECTIVE = {2024: "2026-03-01", 2025: "2026-06-01"}
+VALID_UNTIL = {2024: "2026-05-31"}
 REGION_START = re.compile(r"^(?:Республика |Край |Область |Автономн|г\. |Город |Москва$|Санкт-Петербург$|Севастополь$)", re.I)
 
 
@@ -147,7 +148,7 @@ def main():
         if len(regions) < 80:
             raise ValueError(f"Only {len(regions)} regions found for {year}; source layout needs review")
         existing["years"][str(year)] = {
-            name: {"salary": salary, "effective_from": EFFECTIVE.get(year), "source": SOURCE, "checked_at": checked}
+            name: {"salary": salary, "effective_from": EFFECTIVE.get(year), "valid_until": VALID_UNTIL.get(year), "source": SOURCE, "checked_at": checked}
             for name, salary in regions.items()
         }
     if not any(str(y) in existing["years"] for y in EFFECTIVE):
