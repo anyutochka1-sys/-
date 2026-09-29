@@ -121,6 +121,8 @@ def main():
             for sheet in book.worksheets:
                 for row in list(sheet.iter_rows(values_only=True))[:8]:
                     samples.append([sheet.title, *[str(v)[:70] for v in row[:12]]])
+                for row in list(sheet.iter_rows(values_only=True))[-8:]:
+                    samples.append([sheet.title, *[str(v)[:140] for v in row[:4]]])
                 for row in sheet.iter_rows(values_only=True):
                     if any("Мордов" in str(v) or str(v).strip() in ("2024", "2025") for v in row):
                         samples.append([sheet.title, *[str(v)[:80] for v in row[:12]]])
