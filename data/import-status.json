@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-27T03:44:21.079339+00:00",
-  "status": "partial",
-  "note": "Latest year uses preliminary Rosstat figures; amounts may differ from SFR"
+  "checked_at": "2026-11-03T10:50:54.822302+00:00",
+  "status": "failed",
+  "reason": "Rosstat workbook download (https://www.rosstat.gov.ru/storage/mediabank/tab4-zpl_2025.xlsx): HTTP Error 404: Not Found"
 }
